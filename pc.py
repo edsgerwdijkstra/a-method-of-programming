@@ -209,31 +209,48 @@ def theoremX(num, boolfunc):
 
 
 def main():
-	theoremX(20, f20)
-	theoremX(21, f21)
-	theoremX("my (21)", f21)
-	theoremX(22, f22)
-	theoremX(23, f23)
-	theoremX(24, f24)
-	theoremX(25, f25)
-	theoremX(26, f26)
-	theoremX(27, f27)
+	# theoremX(20, f20)
+	# theoremX(21, f21)
+	# theoremX("my (21)", f21)
+	# theoremX(22, f22)
+	# theoremX(23, f23)
+	# theoremX(24, f24)
+	# theoremX(25, f25)
+	# theoremX(26, f26)
+	# theoremX(27, f27)
 
-	theoremX("E1f1", e1f1)
-	theoremX("E1f2", e1f2)
+	# theoremX("E1f1", e1f1)
+	# theoremX("E1f2", e1f2)
 
-	theoremX(28, f28)
+	# theoremX(28, f28)
 
-	theoremX("E2", e2)
-	theoremX("E3", e3)
+	# theoremX("E2", e2)
+	# theoremX("E3", e3)
 
-	theoremX(29, f29)
-	theoremX(30, f30)
-	theoremX(31, f31)
-	theoremX(32, f32)
+	# theoremX(29, f29)
+	# theoremX(30, f30)
+	# theoremX(31, f31)
+	# theoremX(32, f32)
 
-	theoremX("E4f1", e4f1)
-	theoremX("E4f2", e4f2)
+	# theoremX("E4f1", e4f1)
+	# theoremX("E4f2", e4f2)
+
+	theoremX(38, f38)
+	theoremX("E6f1", e6f1)
+	theoremX("E6f2", e6f2)
+	theoremX("E6f3", e6f3)
+	theoremX("E6f4", e6f4)
+
+	theoremX("E7f1", e7f1)
+	theoremX("E7f2", e7f2)
+	theoremX("E7f3", e7f3)
+	theoremX("E7f4", e7f4)
+
+	theoremX("E8f1", e8f1)
+	theoremX("E8f2", e8f2)
+	theoremX("E8f3", e8f3)
+	theoremX("E8f4", e8f4)
+
 
 if __name__ == "__main__":
 	main()
