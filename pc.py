@@ -154,7 +154,7 @@ def boolfunc_argc(boolfunc):
 
 	n = len(sig.parameters)
 
-	assert (n == 2) or (n == 3)
+	assert (n == 2) or (n == 3) or (n == 4)
 
 	return n
 
@@ -195,6 +195,8 @@ def theoremX(num, boolfunc):
 			r.append(S)
 			print("| {:<6} | {:<6} | {:<6} | = {:<6}".format(repr(P), repr(Q), repr(R), repr(S)))
 	elif boolfunc_argc(boolfunc) == 4:
+		domain = vals4
+		for v in domain:
 			P = v[0]
 			Q = v[1]
 			R = v[2]
