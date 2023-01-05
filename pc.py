@@ -20,6 +20,25 @@ vals3 = [
 	[True, True, True]
 	]
 
+vals4 = [
+	[False, False, False, False],
+	[False, False, False, True],
+	[False, False, True, False],
+	[False, False, True, True],
+	[False, True, False, False],
+	[False, True, False, True],
+	[False, True, True, False],
+	[False, True, True, True],
+	[True, False, False, False],
+	[True, False, False, True],
+	[True, False, True, False],
+	[True, False, True, True],
+	[True, True, False, False],
+	[True, True, False, True],
+	[True, True, True, False],
+	[True, True, True, True]
+]
+
 def f20(P, Q):
 	"""
 	the brackets in this formula are irrelevant
@@ -82,10 +101,49 @@ def f32(P, Q):
 	return ((P == Q)) == ((implies(P, Q)) and (implies(Q, P)))
 
 def e4f1(P, Q, R):
-	return ((implies(P, Q)) or R) == (implies((P and R), (Q or R)))
+	return ((implies(P, Q)) or R) == (implies((P or R), (Q or R)))
 
 def e4f2(P, Q, R):
 	return ((implies(P, Q)) or (not R)) == (implies((P and R), (Q and R)))
+
+def f38(P, Q, R):
+	return implies(implies(P, Q), implies(P or R, Q or R))
+
+def e6f1(P, Q):
+	return ((P and Q) == False) == ((not P) or (not Q))
+
+def e6f2(P, Q):
+	return (P and Q) == (((not P) and (not Q)) == (P == (not Q)))
+
+def e6f3(P, Q, R):
+	return ((P and R) == (Q and R)) == (((not P) and R) == ((not Q) and R))
+
+def e6f4(P, Q, R):
+	return ((P or R) == (Q or R)) == (((not P) or R) == ((not Q) or R))
+
+def e7f1(P, Q, R):
+	return (((not P) or Q) and ((not Q) or R) and P and (not R)) == False
+
+def e7f2(P, Q, R, S):
+	return (P and Q) or (R and S) or (not P)  or (not R) or (not (Q or S))
+
+def e7f3(P, Q):
+	return (not P) or Q or ((P or Q) and ((not P) or (not Q)))
+
+def e7f4(P, Q, R):
+	return ((P and Q) or (Q and R) or (R and P)) == ((P or Q) and (Q or R) and (R or P))
+
+def e8f1(P, Q):
+	return implies(implies(P, Q), implies(P, Q))
+
+def e8f2(P, Q, R):
+	return implies(implies(P, Q), implies((P and R), (Q and R)))
+
+def e8f3(P, Q, R):
+	return (R and implies(P, Q)) == implies(((not R) or P), (R and Q))
+
+def e8f4(P, Q, R):
+	return implies((P and Q), R) == implies(P, ((not Q) or R))
 
 def boolfunc_argc(boolfunc):
 	try:
@@ -136,6 +194,14 @@ def theoremX(num, boolfunc):
 			S = boolfunc(P, Q, R)
 			r.append(S)
 			print("| {:<6} | {:<6} | {:<6} | = {:<6}".format(repr(P), repr(Q), repr(R), repr(S)))
+	elif boolfunc_argc(boolfunc) == 4:
+			P = v[0]
+			Q = v[1]
+			R = v[2]
+			S = v[3]
+			T = boolfunc(P, Q, R, S)
+			r.append(T)
+			print("| {:<6} | {:<6} | {:<6} | {:<6} | = {:<6}".format(repr(P), repr(Q), repr(R), repr(S), repr(T)))
 	else:
 		raise TypeError
 
