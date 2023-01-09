@@ -134,7 +134,7 @@ def e7f4(P, Q, R):
 	return ((P and Q) or (Q and R) or (R and P)) == ((P or Q) and (Q or R) and (R or P))
 
 def e8f1(P, Q):
-	return implies(implies(P, Q), implies(P, Q))
+	return implies((P == Q), implies(P, Q))
 
 def e8f2(P, Q, R):
 	return implies(implies(P, Q), implies((P and R), (Q and R)))
@@ -144,6 +144,11 @@ def e8f3(P, Q, R):
 
 def e8f4(P, Q, R):
 	return implies((P and Q), R) == implies(P, ((not Q) or R))
+
+#################################### My checks #################################
+def myf0(P, Q):
+	return (not (Q == (not P))) == ((not Q) == (not P))
+################################################################################
 
 def boolfunc_argc(boolfunc):
 	try:
@@ -252,7 +257,8 @@ def main():
 	theoremX("E8f2", e8f2)
 	theoremX("E8f3", e8f3)
 	theoremX("E8f4", e8f4)
-
+################################################################################
+	theoremX("myf0", myf0)
 
 if __name__ == "__main__":
 	main()
