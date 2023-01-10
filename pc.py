@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 from inspect import signature
+import sympy
+
 ##
 vals = [
 	[False, False],
@@ -145,7 +147,151 @@ def e8f3(P, Q, R):
 def e8f4(P, Q, R):
 	return implies((P and Q), R) == implies(P, ((not Q) or R))
 
+#################################### My quantifier checks ######################
+
+def rx(x):
+	return ((x % 3) == 0)
+
+def fx(x):
+	return ((x % 2) == 0)# sympy.isprime(x)
+
+def sx(x):
+	return ((x % 5) == 0)
+
+def Aleft0(x):
+	if rx(x):
+		return fx(x)
+	else:
+		return True
+
+def Aright0(x):
+	return ((not rx(x)) or fx(x))
+
+def Ax0(): # A, trading p.c.77
+	r = []
+	for x in range(1, 100):
+		if x == 1:
+			P = Aleft0(x)
+			Q = Aright0(x)
+		else:
+			P = (P and  Aleft0(x)) # generalization conjunction
+			Q = (Q and  Aright0(x))
+		R = (P == Q)
+
+	r.append(R)
+	is_validf(__name__, r)
+
+def Aleft1(x):
+	if rx(x) and sx(x):
+		return fx(x)
+	else:
+		return True
+
+def Aright1(x):
+	if rx(x):
+		return ((not sx(x)) or fx(x))
+	else:
+		return True
+
+def Ax1(): # (42a)
+	r = []
+	for x in range(1, 100):
+		if x == 1:
+			P = Aleft1(x)
+			Q = Aright1(x)
+		else:
+			P = (P and  Aleft1(x)) # generalization conjunction
+			Q = (Q and  Aright1(x))
+		R = (P == Q)
+
+	r.append(R)
+	is_validf(__name__, r)
+
+
+def Aleft2(x):
+	if rx(x):
+		return fx(x)
+	else:
+		return True
+
+def Aright2(x):
+	if rx(x):
+		return (fx(x) or sx(x))
+	else:
+		return True
+
+def Ax2(): # (43a)
+	r = []
+	for x in range(1, 100):
+		if x == 1:
+			P = Aleft2(x)
+			Q = Aright2(x)
+		else:
+			P = (P and  Aleft2(x)) # generalization conjunction
+			Q = (Q and  Aright2(x))
+		R = implies(P, Q)
+
+	r.append(R)
+	is_validf(__name__, r)
+
+def Eleft0(x):
+	if rx(x) and sx(x):
+		return fx(x)
+	else:
+		return False
+
+def Eright0(x):
+	if rx(x):
+		return (sx(x) and fx(x))
+	else:
+		return False
+
+def Ex0(): # (42b)
+	r = []
+	for x in range(1, 100):
+		if x == 1:
+			P = Eleft0(x)
+			Q = Eright0(x)
+		else:
+			P = (P or  Eleft0(x)) # generalization disjunction
+			Q = (Q or  Eright0(x))
+		R = (P == Q)
+
+	r.append(R)
+	is_validf(__name__, r)
+
+def e9f1_left(x):
+	if rx(x):
+		return fx(x)
+	else:
+		return True
+
+def e9f1_right(x):
+	if rx(x):
+		return (rx(x) and fx(x))
+	else:
+		return True
+
+def e9f1():
+	print(__name__)
+	r = []
+	for x in range(1, 100):
+		if x == 1:
+			P = e9f1_left(x)
+			Q = e9f1_right(x)
+		else:
+			P = (P and  e9f1_left(x)) # generalization conjunction
+			Q = (Q and  e9f1_right(x))
+
+		R = (P == Q)
+		print("| {:<6} | {:<6} | = {:<6}".format(repr(P), repr(Q), repr(R)))
+
+	r.append(R)
+	is_validf(__name__, r)
+
+
 #################################### My checks #################################
+
 def myf0(P, Q):
 	return (not (Q == (not P))) == ((not Q) == (not P))
 ################################################################################
@@ -242,23 +388,28 @@ def main():
 	# theoremX("E4f1", e4f1)
 	# theoremX("E4f2", e4f2)
 
-	theoremX(38, f38)
-	theoremX("E6f1", e6f1)
-	theoremX("E6f2", e6f2)
-	theoremX("E6f3", e6f3)
-	theoremX("E6f4", e6f4)
+	# theoremX(38, f38)
+	# theoremX("E6f1", e6f1)
+	# theoremX("E6f2", e6f2)
+	# theoremX("E6f3", e6f3)
+	# theoremX("E6f4", e6f4)
 
-	theoremX("E7f1", e7f1)
-	theoremX("E7f2", e7f2)
-	theoremX("E7f3", e7f3)
-	theoremX("E7f4", e7f4)
+	# theoremX("E7f1", e7f1)
+	# theoremX("E7f2", e7f2)
+	# theoremX("E7f3", e7f3)
+	# theoremX("E7f4", e7f4)
 
-	theoremX("E8f1", e8f1)
-	theoremX("E8f2", e8f2)
-	theoremX("E8f3", e8f3)
-	theoremX("E8f4", e8f4)
+	# theoremX("E8f1", e8f1)
+	# theoremX("E8f2", e8f2)
+	# theoremX("E8f3", e8f3)
+	# theoremX("E8f4", e8f4)
 ################################################################################
-	theoremX("myf0", myf0)
+	#theoremX("myf0", myf0)
+	#Ax0()
+	#Ax1()
+	#Ax2()
+	#Ex0()
+	e9f1()
 
 if __name__ == "__main__":
 	main()
